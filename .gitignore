@@ -1,8 +1,11 @@
+bin/
+obj/
+
 # Compiled Object files
 *.slo
 *.lo
 *.o
-*.obj
+*.suo
 
 # Precompiled Headers
 *.gch
@@ -15,12 +18,6 @@
 
 # Fortran module files
 *.mod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
 
 # Executables
 *.exe

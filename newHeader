@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+  echo "newHeader -- Creates a new h file in correct folder"
+  echo "Usage: newClass [name of class] [optional: subfolderLocation]"
+  exit 1
+fi
+
+outFolder=
+
+if [[ -n $2 ]]; then
+  outFolder="$2"/
+fi
+
+className=$1
+
+includeFolder=include/$outFolder
+includeFile="$includeFolder$className.h"
+
+if [[ ! -d $includeFolder ]]; then
+  mkdir $includeFolder
+fi
+
+echo $className.h
+
+touch $includeFile
+
+echo -e "#pragma once
+
+
+" >> $includeFile
+
+echo $includeFile >> lilac.files
+
+# premake vs2013

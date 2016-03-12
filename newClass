@@ -1,0 +1,71 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+  echo "newClass -- Creates a new class cpp and h files in correct folders"
+  echo "Usage: newClass [name of class] [optional: subfolderLocation]"
+  exit 1
+fi
+
+outFolder=
+
+if [[ -n $2 ]]; then
+  outFolder="$2"/
+fi
+
+className=$1
+srcFolder=src/$outFolder
+srcFile="$srcFolder$className.cpp"
+
+if [[ ! -d $srcFolder ]]; then
+  mkdir $srcFolder
+fi
+
+includeFolder=include/$outFolder
+includeFile="$includeFolder$className.h"
+
+if [[ ! -d $includeFolder ]]; then
+  mkdir $includeFolder
+fi
+
+touch $srcFile
+echo $srcFile >> lilac.files
+
+echo $className.h
+
+if [[ -e "include/CommonPrecompiled.h" ]]; then
+  echo -e "#include \"CommonPrecompiled.h\"" >> $srcFile
+else
+  echo -e "#include \"CommonIncludes.h\"" >> $srcFile
+fi
+
+echo -e "#include \"$className.h\"
+
+$className::$className()
+{
+  TODO(\"Write $className\");
+}
+
+$className::~$className()
+{
+
+}
+
+" >> $srcFile
+
+touch $includeFile
+echo $includeFile >> lilac.files
+
+echo $className.cpp
+echo -e "#pragma once
+
+class $className
+{
+public:
+  $className();
+  ~$className();
+
+private:
+};
+" >> $includeFile
+
+# premake vs2013
