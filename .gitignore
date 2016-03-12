@@ -1,6 +1,10 @@
 bin/
 obj/
 
+#symlinks
+include/networking
+src/networking
+
 # Compiled Object files
 *.slo
 *.lo
