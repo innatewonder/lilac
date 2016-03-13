@@ -56,10 +56,6 @@ solution "mythril"
         "Ws2_32"
       }
 
-        -- FreeImage_d
-        -- zziplib_d
-        -- zlib_d
-
     elseif(os.get() == "linux") then
       buildoptions { "-std=c++11" }
       links {
@@ -77,15 +73,6 @@ solution "mythril"
       "X11",
       "Xcursor",
       "Xinerama",
-      -- "Xt",
-      -- "Xaw",
-      -- "freetype",
-      -- "freeimage",
-      -- "zzip",  
-     -- z 
-     -- SM 
-     -- ICE 
-     -- Xext 
       }
     end
 

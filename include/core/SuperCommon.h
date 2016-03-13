@@ -7,6 +7,8 @@
 //Some Default Includes
 #include <iostream>
 #include <string>
+#include <chrono>
+#include <functional>
 
 typedef std::string String;
 const String EMPTY_STRING = "";

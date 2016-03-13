@@ -49,7 +49,7 @@ void Factory::Initialize()
     {
       if(GetCompSys(Comp::ComponentDef(j)) == i)
       {
-        sysCompMaxSize = Math::Max(sysCompMaxSize, GetCompSize(Comp::ComponentDef(j)));
+        sysCompMaxSize = std::max(sysCompMaxSize, GetCompSize(Comp::ComponentDef(j)));
       }
     }
 

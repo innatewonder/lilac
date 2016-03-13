@@ -17,6 +17,8 @@
 #include <GL/glew.h>
 #include "GL/glfw3.h"
 
+typedef GLFWwindow GraphicsWindow;
+
 #ifdef _WIN32
   #undef APIENTRY
   #define GLFW_EXPOSE_NATIVE_WIN32
@@ -34,9 +36,6 @@
 //Math
 #include "MathIncludes.h"
 #include "MathDefines.h"
-
-#include <chrono>
-#include <functional>
 
 #define SLEEP_MILLI(x) std::this_thread::sleep_for(std::chrono::milliseconds(x))
 
