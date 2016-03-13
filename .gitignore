@@ -1,14 +1,23 @@
 bin/
 obj/
+settings/
 
 #symlinks
 include/networking
 src/networking
+include/audio
+src/audio
 
 # Compiled Object files
 *.slo
 *.lo
 *.o
+
+#vs files
+*.sln
+*.vcxproj
+*.filters
+*.user
 *.suo
 
 # Precompiled Headers
