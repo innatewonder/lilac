@@ -6,6 +6,7 @@
 */
 #include "CommonPrecompiled.h"
 #include "ConsoleComponent.h"
+#include "imgui.h"
 
 namespace GUI
 {

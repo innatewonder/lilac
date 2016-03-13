@@ -55,12 +55,6 @@ typedef u32 UID;
 #include "Event.h"
 #include "Delegate.h"
 
-#include "TypeInfo.h"
-#include "MetaCommon.h"
-#include "MetaData.h"
-#include "Variant.h"
-#include "MetaInterface.h"
-
 #include "Timer.h"
 #include "Component.h"
 #include "Object.h"
