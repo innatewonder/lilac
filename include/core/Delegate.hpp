@@ -38,7 +38,7 @@ namespace Core
   }
 
   template <typename return_type, typename... parameters, typename... payload, template<typename...> class argument_template>
-  bool DELEGATE_GLOBAL<return_type, argument_template<parameters...>, argument_template<payload...>>::Equal(const DELEGATE_BASE* rhs) const
+  bool DELEGATE_GLOBAL<return_type, argument_template<parameters...>, argument_template<payload...>>::Equal(const DELEGATE_BASE<return_type, parameters...>* rhs) const
   {
     return GetFunctionPointer() == rhs->GetFunctionPointer() && GetObjectPointer() == rhs->GetObjectPointer();
   }
@@ -131,7 +131,7 @@ namespace Core
   }
 
   template <typename reciever, typename return_type, typename... parameters, typename... payload, template<typename...> class argument_template>
-  bool DELEGATE_METHOD<reciever, return_type, argument_template<parameters...>, argument_template<payload...>>::Equal(const DELEGATE_BASE* rhs) const
+  bool DELEGATE_METHOD<reciever, return_type, argument_template<parameters...>, argument_template<payload...>>::Equal(const DELEGATE_BASE<return_type, parameters...>* rhs) const
   {
     return GetFunctionPointer() == rhs->GetFunctionPointer() && GetObjectPointer() == rhs->GetObjectPointer();
   }

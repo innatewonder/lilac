@@ -252,7 +252,7 @@ namespace GUI
       io.AddInputCharacter((unsigned short)c);
   }
 
-#elif
+#else
   void InterfaceInitialize(void* window, void* device, void* context) { }
   void InterfaceShutdown(void) { }
   void InterfaceUpdate(void) { }

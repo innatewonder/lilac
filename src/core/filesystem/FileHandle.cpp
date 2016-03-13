@@ -195,7 +195,7 @@ namespace Filesystem
   *******************************/
   const char* FileHandle::ReadFile()
   {
-    auto handle = std::ifstream(m_fileName, std::istream::binary | std::istream::in);
+    std::ifstream handle(m_fileName, std::istream::binary | std::istream::in);
     if(m_file == nullptr)
     {
       m_file = new char[m_size];

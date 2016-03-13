@@ -37,7 +37,11 @@ const String EMPTY_STRING = "";
 #include <cassert>
 
 #ifdef _DEBUG
-  #define BREAK __debugbreak()
+  #if PLATFORM == PLAT_WINDOWS
+    #define BREAK __debugbreak()
+  #else
+    #define BREAK __builtin_trap()
+  #endif
 #else
   #define BREAK 
 #endif

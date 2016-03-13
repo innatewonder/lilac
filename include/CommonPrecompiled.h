@@ -39,6 +39,8 @@ typedef GLFWwindow GraphicsWindow;
 
 #define SLEEP_MILLI(x) std::this_thread::sleep_for(std::chrono::milliseconds(x))
 
+#include "Memory.h"
+
 //ThreadLibrary
 #include "HBThread.h"
 #include "UpdateType.h" 
@@ -48,11 +50,9 @@ typedef u32 UID;
 #include "ArgParser.h"
 
 // engine
-#include "Memory.h"
 #include "Factory.h"
 #include "Message.h"
 #include "Event.h"
-#include "Delegate.h"
 
 #include "Timer.h"
 #include "Component.h"

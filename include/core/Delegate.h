@@ -33,7 +33,7 @@ namespace Core
       virtual return_type operator()(parameters... arguments) const override;
       virtual return_type Call(parameters... arguments) const override;
 
-      virtual bool Equal(const DELEGATE_BASE* rhs) const override;
+      virtual bool Equal(const DELEGATE_BASE<return_type, parameters...>* rhs) const override;
 
       INLINE virtual DelegateType::Type GetType(void) const override;
       INLINE virtual void* GetFunctionPointer(void) const override;
@@ -78,7 +78,7 @@ namespace Core
 
       virtual return_type operator()(parameters...) const override;
       virtual return_type Call(parameters...) const override;
-      virtual bool Equal(const DELEGATE_BASE* rhs) const override;
+      virtual bool Equal(const DELEGATE_BASE<return_type, parameters...>* rhs) const override;
 
       INLINE virtual DelegateType::Type GetType(void) const override;
       INLINE virtual void* GetFunctionPointer(void) const override;

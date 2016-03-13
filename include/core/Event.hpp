@@ -14,21 +14,21 @@ namespace Core
   }
 
   template <typename... parameters, typename... payload, template<typename...> class argument_template>
-  void BaseEvent<argument_template<parameters...>, argument_template<payload...>>::operator+=(DeletageType* function)
+  void BaseEvent<argument_template<parameters...>, argument_template<payload...>>::operator+=(DeletageType* fn)
   {
-    Register(function);
+    Register(fn);
   }
 
   template <typename... parameters, typename... payload, template<typename...> class argument_template>
-  void BaseEvent<argument_template<parameters...>, argument_template<payload...>>::operator-=(DeletageType* function)
+  void BaseEvent<argument_template<parameters...>, argument_template<payload...>>::operator-=(DeletageType* fn)
   {
-    Unregister(function);
+    Unregister(fn);
   }
 
   template <typename... parameters, typename... payload, template<typename...> class argument_template>
   void BaseEvent<argument_template<parameters...>, argument_template<payload...>>::Clear(void)
   {
-    listeners.clear();
+    this->listeners.clear();
   }
 
 
@@ -52,37 +52,37 @@ namespace Core
   }
 
   template <typename... parameters, typename... payload, template<typename...> class argument_template>
-  void EventPayload<argument_template<parameters...>, argument_template<payload...>>::Register(DeletageType* function)
+  void EventPayload<argument_template<parameters...>, argument_template<payload...>>::Register(DeletageType* fn)
   {
-    assertion(function);
-    for(ListenerList::const_iterator it = listeners.begin(); it != listeners.end(); ++it)
+    assertion(fn);
+    for(auto it = this->listeners.begin(); it != this->listeners.end(); ++it)
     {
-      if((*it)->Equal(function))
+      if((*it)->Equal(fn))
       {
         WARN("Reregistering delegate to EventPayload.");
         return;
       }
     }
 
-    listeners.push_back(function);
+    this->listeners.push_back(fn);
   }
 
   template <typename... parameters, typename... payload, template<typename...> class argument_template>
-  void EventPayload<argument_template<parameters...>, argument_template<payload...>>::Unregister(DeletageType* function)
+  void EventPayload<argument_template<parameters...>, argument_template<payload...>>::Unregister(DeletageType* fn)
   {
-    assertion(function);
-    ListenerList::const_iterator remove = listeners.end();
-    for(ListenerList::const_iterator it = listeners.begin(); it != listeners.end(); ++it)
+    assertion(fn);
+    auto remove = this->listeners.end();
+    for(auto it = this->listeners.begin(); it != this->listeners.end(); ++it)
     {
-      if((*it)->Equal(function))
+      if((*it)->Equal(fn))
       {
         remove = it;
         break;
       }
     }
 
-    if(remove != listeners.end())
-      listeners.erase(remove);
+    if(remove != this->listeners.end())
+      this->listeners.erase(remove);
     else
       WARN("Unregistering delegate that does not exist in EventPayload.");
   }
@@ -120,7 +120,7 @@ namespace Core
   template <typename... parameters, typename... payload, template<typename...> class argument_template> template<s32... S>
   void EventPayload<argument_template<parameters...>, argument_template<payload...>>::BroadcastUnpackPayload(parameters... arguments, Containers::SequenceIndex<S...>) const
   {
-    for(ListenerList::const_iterator it = listeners.begin(); it != listeners.end(); ++it)
+    for(auto it = this->listeners.begin(); it != this->listeners.end(); ++it)
     {
       (*it)->Call(arguments..., std::get<S>(Payload) ...);
     }
@@ -129,7 +129,7 @@ namespace Core
   template <typename... parameters, typename... payload, template<typename...> class argument_template> template<s32... S>
   void EventPayload<argument_template<parameters...>, argument_template<payload...>>::SafeBroadcastUnpackPayload(parameters... arguments, Containers::SequenceIndex<S...>) const
   {
-    for(ListenerList::const_iterator it = listeners.begin(); it != listeners.end(); ++it)
+    for(auto it = this->listeners.begin(); it != this->listeners.end(); ++it)
     {
       (*it)->SafeCall(arguments..., std::get<S>(Payload) ...);
     }
@@ -142,7 +142,7 @@ namespace Core
   template <typename... parameters>
   void Event<parameters...>::Broadcast(parameters... arguments) const
   {
-    for(ListenerList::const_iterator it = listeners.begin(); it != listeners.end(); ++it)
+    for(auto it = this->listeners.begin(); it != this->listeners.end(); ++it)
     {
       (*it)->Call(arguments...);
     }
@@ -151,44 +151,44 @@ namespace Core
   template <typename... parameters>
   void Event<parameters...>::SafeBroadcast(parameters... arguments) const
   {
-    for(ListenerList::const_iterator it = listeners.begin(); it != listeners.end(); ++it)
+    for(auto it = this->listeners.begin(); it != this->listeners.end(); ++it)
     {
       (*it)->SafeCall(arguments...);
     }
   }
 
   template <typename... parameters>
-  void Event<parameters...>::Register(DeletageType* function)
+  void Event<parameters...>::Register(DeletageType* fn)
   {
-    assertion(function);
-    for(ListenerList::const_iterator it = listeners.begin(); it != listeners.end(); ++it)
+    assertion(fn);
+    for(auto it = this->listeners.begin(); it != this->listeners.end(); ++it)
     {
-      if((*it)->Equal(function))
+      if((*it)->Equal(fn))
       {
         WARN("Reregistering delegate to Event.");
         return;
       }
     }
 
-    listeners.push_back(function);
+    this->listeners.push_back(fn);
   }
 
   template <typename... parameters>
-  void Event<parameters...>::Unregister(DeletageType* function)
+  void Event<parameters...>::Unregister(DeletageType* fn)
   {
-    assertion(function);
-    ListenerList::const_iterator remove = listeners.end();
-    for(ListenerList::const_iterator it = listeners.begin(); it != listeners.end(); ++it)
+    assertion(fn);
+    auto remove = this->listeners.end();
+    for(auto it = this->listeners.begin(); it != this->listeners.end(); ++it)
     {
-      if((*it)->Equal(function))
+      if((*it)->Equal(fn))
       {
         remove = it;
         break;
       }
     }
 
-    if(remove != listeners.end())
-      listeners.erase(remove);
+    if(remove != this->listeners.end())
+      this->listeners.erase(remove);
     else
       WARN("Unregistering delegate that does not exist in Event.");
   }

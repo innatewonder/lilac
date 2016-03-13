@@ -41,7 +41,7 @@ namespace Core
   public:
     Event();
 
-    typedef typename BaseEvent::DeletageType DeletageType;
+    typedef typename BaseEvent<Containers::ArgumentList<parameters...>, EMPTY_PAYLOAD>::DeletageType DeletageType;
 
     virtual void Broadcast(parameters...) const override;
     virtual void SafeBroadcast(parameters...) const override;
@@ -59,7 +59,7 @@ namespace Core
     public:
       EventPayload(payload...);
 
-      typedef typename BaseEvent::DeletageType DeletageType;
+      typedef typename BaseEvent<argument_template<parameters...>, argument_template<payload...>>::DeletageType DeletageType;
 
       virtual void Broadcast(parameters...) const override;
       virtual void SafeBroadcast(parameters...) const override;
