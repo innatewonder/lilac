@@ -11,30 +11,32 @@ Creation date: 9.8.13
 - End Header --------------------------------------------------------*/
 #pragma once
 
-class Model;
-
-struct Vertex;
-class HalfEdge;
-struct Face;
-
-typedef std::vector<u32>      IndexCont;
-typedef std::vector<Vertex>   VertexCont;
-typedef std::vector<HalfEdge> EdgeCont;
-typedef std::list<HalfEdge*>  BorderCont;
-
-struct Vertex
+namespace Graphics
 {
-  Vertex();
-  Math::Vector4 position;
-  Math::Vector4 normal;
-  Math::Vector2 UV;
-  HalfEdge* edge;
+  class Model;
 
-  void AverageFaceNormal(Face* f);
-};
+  struct Vertex;
+  class HalfEdge;
+  struct Face;
 
-class HalfEdge
-{
+  typedef std::vector<u32>      IndexCont;
+  typedef std::vector<Vertex>   VertexCont;
+  typedef std::vector<HalfEdge> EdgeCont;
+  typedef std::list<HalfEdge*>  BorderCont;
+
+  struct Vertex
+  {
+    Vertex();
+    Math::Vector4 position;
+    Math::Vector4 normal;
+    Math::Vector2 UV;
+    HalfEdge* edge;
+
+    void AverageFaceNormal(Face* f);
+  };
+
+  class HalfEdge
+  {
   public:
     HalfEdge(u32 head, Face* f, u32 tail);
     void SetNext(HalfEdge* next);
@@ -50,14 +52,15 @@ class HalfEdge
 
     HalfEdge* twin;
     HalfEdge* next;
-};
+  };
 
-struct Face
-{
-  Face();
+  struct Face
+  {
+    Face();
 
-  HalfEdge* edges;
-  bool visited;
+    HalfEdge* edges;
+    bool visited;
 
-  Math::Vector4 normal;
-};
+    Math::Vector4 normal;
+  };
+}

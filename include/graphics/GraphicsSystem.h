@@ -2,12 +2,12 @@
 
 #include "Camera.h"
 
-class IGraphicsAPI;
-class Shader;
 #define GRAPHICS_API_OPENGL
 
 namespace Graphics
 {
+  class IGraphicsAPI;
+  class Shader;
   class RenderableComponent;
   class GraphicsSystem : public System
   {

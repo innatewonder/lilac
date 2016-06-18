@@ -72,6 +72,8 @@ namespace Graphics
 
   void GraphicsSystem::Test()
   {
+    return;
+
     //String filename("assets/models/Cube.obj");
     String filename("assets/models/horse_lowres_cleaned.obj");
     //String filename("assets/models/happy_lowres_cleaned.obj");

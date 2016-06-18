@@ -72,7 +72,6 @@ namespace Containers
   template<int...S> struct Sequence<0, S...> { typedef SequenceIndex<S...> type; };
 }
 
-
 #define EMPTY_PARAMETERS  Containers::Tuple<>
 #define EMPTY_ARGUMENTS   Containers::Tuple<>
 #define EMPTY_PAYLOAD     Containers::Tuple<>

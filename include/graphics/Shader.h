@@ -1,23 +1,26 @@
 #pragma once
 
-class Shader
+namespace Graphics
 {
-public:
-  Shader(std::string vs, std::string fs);
-  ~Shader();
-  void Bind(Math::Matrix& proj, Math::Matrix& view);
-  void UnBind();
-  s32  GetID();
+  class Shader
+  {
+  public:
+    Shader(std::string vs, std::string fs);
+    ~Shader();
+    void Bind(Math::Matrix& proj, Math::Matrix& view);
+    void UnBind();
+    s32  GetID();
 
-  void AddFile(std::string filename, s32 type);
-  void Link();
+    void AddFile(std::string filename, s32 type);
+    void Link();
 
-private:
+  private:
 
-  const char* ReadEntireFile(std::string filename);
+    const char* ReadEntireFile(std::string filename);
 
-  s32 m_id;
-};
+    s32 m_id;
+  };
+}
 
 #if PLATFORM == PLAT_UNIX
 #define CHECK_GL_ERR \

@@ -46,7 +46,7 @@ const String EMPTY_STRING = "";
   #define BREAK 
 #endif
 
-#ifdef _USE_CONTROL_ADV_ASSERT_
+#if PLATFORM == PLAT_WINDOWS
   #ifdef _DEBUG
     #define assertion(x) \
     { \
@@ -61,7 +61,7 @@ const String EMPTY_STRING = "";
   #endif//_DEBUG
 #else
   #define assertion(x) assert(x)
-#endif //_USE_CONTROL_ADV_ASSERT_
+#endif
 
 #define SOFTASSERT(statement, msg, retval) \
   if(!(statement)) \

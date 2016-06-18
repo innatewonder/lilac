@@ -3,7 +3,7 @@
 
 Camera::Camera()
 {
-  m_position = Math::Point4(0, 0, 50);
+  m_position = Math::Point4(0, -30, 50);
 }
 
 void Camera::SetPosition(Math::Point4 &pos)
