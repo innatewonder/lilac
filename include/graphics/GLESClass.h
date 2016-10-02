@@ -2,13 +2,16 @@
 
 #include "IGraphicsAPI.h"
 
-namespace Graphics 
+namespace Graphics
 {
-  class GLClass : public IGraphicsAPI
+  Semaphore glesStartSync;
+  Semaphore glesEndSync;
+
+  class GLESClass : public IGraphicsAPI
   {
   public:
-    GLClass();
-    ~GLClass();
+    GLESClass();
+    ~GLESClass();
 
     virtual bool Initialize();
     virtual void StartFrame();
@@ -21,7 +24,6 @@ namespace Graphics
     virtual GraphicsWindow* GetWindow() const;
 
   private:
-    GraphicsWindow* m_window;
     s32 m_width, m_height;
   };
 

@@ -19,11 +19,14 @@ const String EMPTY_STRING = "";
 #define PLAT_WINDOWS  1
 #define PLAT_MAC      2
 #define PLAT_UNIX     3
+#define PLAT_ANDROID  4
 
 #if defined(_WIN32)
   #define PLATFORM PLAT_WINDOWS
 #elif defined(__APPLE__)
   #define PLATFORM PLAT_MAC
+#elif defined(PLATFORM_ANDROID)
+  #define PLATFORM PLAT_ANDROID
 #else
   #define PLATFORM PLAT_UNIX
 #endif

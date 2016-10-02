@@ -2,6 +2,8 @@
 
 #include "Object.h"
 
+void Run(ArgParser ars);
+
 namespace Core
 {
   class Core : public System

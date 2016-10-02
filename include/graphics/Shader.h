@@ -22,16 +22,7 @@ namespace Graphics
   };
 }
 
-#if PLATFORM == PLAT_UNIX
-#define CHECK_GL_ERR \
-{ \
-  int err = glGetError();\
-  if (err) { \
-    fprintf(stderr, "OpenGL error (at line %d in %s): %s\n", \
-      __LINE__, __FILE__, gluErrorString(err)); \
-    exit(-1); } \
-}
-#else
+#if PLATFORM == PLAT_WINDOWS
 #define CHECK_GL_ERR \
 { \
 int err = glGetError(); \
@@ -39,5 +30,14 @@ if(err) { \
     fprintf(stderr, "OpenGL error (at line %d in %s): %i\n", \
     __LINE__, __FILE__, err); \
     __debugbreak(); } \
+}
+#else
+#define CHECK_GL_ERR \
+{ \
+  int err = glGetError();\
+  if (err) { \
+    fprintf(stderr, "OpenGL error (at line %d in %s): %s\n", \
+      __LINE__, __FILE__, gluErrorString(err)); \
+    exit(-1); } \
 }
 #endif

@@ -1,6 +1,38 @@
 #include "CommonPrecompiled.h"
 #include "Core.h"
 
+void Run(ArgParser args)
+{
+  Memory::Initialize(args);
+  //scope so that the global memory manager will close properly
+  {
+    Factory::Initialize();
+
+    Core::CoreUtils utils;
+    UpdateTypeManager updateMgr;
+
+    Core::Core core;
+    core.PreInitialize(args);
+
+#define SYSTEM_DEF(space, x) core.AddSystem(Memory::New<space::x>());
+#include "SystemDefines.h"
+#undef SYSTEM_DEF
+
+    core.Initialize(args);
+    core.Test();
+
+    core.Run();
+
+    Memory::gDefaultAllocator->Log();
+    core.Destroy();
+
+    Factory::Destroy();
+  }
+  //LOG("Current Engine memory leaks - 10");
+  Memory::gDefaultAllocator->Log();
+  Memory::Destroy();
+}
+
 namespace Core
 {
 #define SYS_LOOP_MULTI for(System* sys : m_systems)

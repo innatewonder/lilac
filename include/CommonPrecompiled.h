@@ -14,12 +14,15 @@
 #include "gmock/gmock.h"
 
 //OpenGL Includes
-#include <GL/glew.h>
-#include "GL/glfw3.h"
+#if PLATFORM == PLAT_ANDROID
+  #include <GLES2/gl2.h>
+#else  
+  #include <GL/glew.h>
+  #include "GL/glfw3.h"
+  typedef GLFWwindow GraphicsWindow;
+#endif
 
-typedef GLFWwindow GraphicsWindow;
-
-#ifdef _WIN32
+#if PLATFORM == PLAT_WINDOWS
   #undef APIENTRY
   #define GLFW_EXPOSE_NATIVE_WIN32
   #define GLFW_EXPOSE_NATIVE_WGL
