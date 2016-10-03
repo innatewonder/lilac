@@ -1,0 +1,8 @@
+/usr/bin/ld: cannot find -lglew32
+/usr/bin/ld: cannot find -lfmod64_vc
+/usr/bin/ld: cannot find -lglfw3
+/usr/bin/ld: cannot find -lXrandr
+/usr/bin/ld: cannot find -lXxf86vm
+collect2: error: ld returned 1 exit status
+make[1]: *** [bin/debug/mythril] Error 1
+make: *** [mythril] Error 2

@@ -10,12 +10,15 @@
 #include <stdlib.h>
 
 //GMock Includes
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
+#if PLATFORM != PLAT_ANDROID
+  #include "gtest/gtest.h"
+  #include "gmock/gmock.h"
+#endif
 
 //OpenGL Includes
 #if PLATFORM == PLAT_ANDROID
   #include <GLES2/gl2.h>
+  typedef s32 GraphicsWindow;
 #else  
   #include <GL/glew.h>
   #include "GL/glfw3.h"
