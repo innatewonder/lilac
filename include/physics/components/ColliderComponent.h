@@ -21,23 +21,24 @@ namespace Physics
 
     virtual void Initialize() {};
 
-    void SetCollider(Collider* col, f32 mass, 
-      const Vec3& pos = Vec3(0, 0, 0), 
-      const Quaternion& rot = Quaternion(0, 0, 0, 1));
+    void SetCollider(Collider* col, f32 mass);
 
     void AllowCollisions(bool allow = true);
     void AllowForces(bool allow = true);
-    void TurnOn(bool on = true); // sets both collisions and forces
+    void SetActive(bool active = true); // sets both collisions and forces
 
     // applies to collider origin
-    void ApplyImpulse(const Vec3& dir);
-
-    RigidBody* GetRigidBody() const;
+    void ApplyImpulse(const Math::Vector3& dir);
 
   protected:
-    void Init(const RigidBodyInfo& info);
+    enum State {
+      CAN_COLLIDE = 0x01,
+      ALLOW_FORCE = 0x10,
+    };
 
-    RigidBody* m_rigidBody;
+    void AlterState(State s, bool on);
+
+    u32 m_state;
     Collider* m_collider;
   };
 }

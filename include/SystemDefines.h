@@ -18,4 +18,3 @@ SYSTEM_DEF(Audio, AudioSystem)
 
 SYSTEM_DEF(Generation, GenerationSystem)
 SYSTEM_DEF(Networking, NetworkingSystem)
-SYSTEM_DEF(GUI, InterfaceSystem)

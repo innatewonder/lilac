@@ -36,12 +36,6 @@ solution "mythril"
 
       "gmock", 
       --"liblua52", 
-
-      --bullet
-      "BulletSoftBody",
-      "BulletDynamics",
-      "BulletCollision",
-      "LinearMath",
     }
 
     libdirs { "lib/",

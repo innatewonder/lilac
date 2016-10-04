@@ -9,4 +9,3 @@
 #include "CommonIncludes.h"
 #include "AlgebraIncludes.h"
 #include "GeometryIncludes.h"
-#include "ExternalIncludes.h"

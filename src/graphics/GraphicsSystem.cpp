@@ -20,11 +20,7 @@ namespace Graphics
    : m_width(1024), m_height(768), m_fullscreen(false)
    , m_dt(0.f)
   {
-#if PLATFORM == PLAT_ANDROID
-    m_api = new GLESClass();
-#else
-    m_api = new GLClass();
-#endif
+    m_api = new GraphicsAPI();
   }
 
   GraphicsSystem::~GraphicsSystem()

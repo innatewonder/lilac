@@ -25,4 +25,5 @@ namespace Graphics
     s32 m_width, m_height;
   };
 
+  typedef GLClass GraphicsAPI;
 }

@@ -1,8 +1,5 @@
 #include "CommonPrecompiled.h"
 #include "InputSystem.h"
-#if USE_GRAPHICS
-  #include "InterfaceContext.h"
-#endif
 
 namespace Core
 {
@@ -17,13 +14,10 @@ namespace Core
       m->AddData(DAT(action));
 
       gCore->SendMessage(m);
-
-      GUI::InterfaceKeyCallback(window, key, scancode, action, mods);
     }
 
     void CharCallback(GraphicsWindow *window, unsigned key)
     {
-      GUI::InterfaceCharCallback(window, key);
     }
 
     void MouseButtonCallback(GraphicsWindow *window, int button, int action, int mods)
@@ -34,8 +28,6 @@ namespace Core
       m->AddData(DAT(action));
 
       gCore->SendMessage(m);
-
-      GUI::InterfaceMouseButtonCallback(window, button, action, mods);
     }
 
     void CursorPosCallback(GraphicsWindow *window, double x, double y)
@@ -65,8 +57,6 @@ namespace Core
       m->AddData(DAT(yoffset));
 
       gCore->SendMessage(m);
-
-      GUI::InterfaceScrollCallback(window, xoffset, yoffset);
     }
 
     void ResizeCallback(GraphicsWindow* window, int width, int height)

@@ -9,20 +9,15 @@ namespace Physics
     ~TransformComponent();
 
     virtual void Initialize();
-    // note - you don't need to call this, collision is set up through collider components
-    void Initialize(const RigidBodyInfo& info);
 
-    Vec3 GetPosition() const;
-    Quaternion GetRotation() const;
+    Math::Vector3 GetPosition() const;
+    Math::Quaternion GetRotation() const;
 
-    void SetPosition(const Vec3& pos);
-    void SetRotation(const Quaternion& rot);
-
-    RigidBody* GetRigidBody() const;
+    void SetPosition(const Math::Vector3& pos);
+    void SetRotation(const Math::Quaternion& rot);
 
   private:
-    bool CleanUp();
-
-    RigidBody* m_rigidBody;
+    Math::Quaternion m_rot;
+    Math::Vector3 m_pos;
   };
 }

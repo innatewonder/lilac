@@ -41,7 +41,6 @@
 
 //Math
 #include "MathIncludes.h"
-#include "MathDefines.h"
 
 #define SLEEP_MILLI(x) std::this_thread::sleep_for(std::chrono::milliseconds(x))
 
