@@ -16,7 +16,13 @@ public:
   Message(MessageType type);
   ~Message();
 
-  void AddData(void* data, s32 dataSize);
+  void AddData(const void* data, s32 dataSize);
+
+  template <typename T>
+  void AddData(const T data)
+  {
+    AddData(&data, sizeof(T));
+  }
 
   MessageType GetType();
   void Reset();

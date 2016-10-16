@@ -142,7 +142,7 @@ namespace Math
     public:
       OrthographicMatrix(f32 width, f32 height, f32 near, f32 far);
 
-      static Matrix Build(f32 fov, f32 aspect, f32 near, f32 far);
+      static Matrix Build(f32 width, f32 height, f32 near, f32 far);
   };
 
   class ViewMatrix : public Matrix

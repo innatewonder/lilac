@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <atomic>
 #include <functional>
 
 typedef std::string String;
@@ -88,9 +89,29 @@ const String EMPTY_STRING = "";
 
 /////////////////
 //LOGGER
-#define LOG(x) std::cout << x << std::endl;
-#define WARN(x) std::cout << "[WARNING]: " << x << std::endl;
-#define ERR(x) std::cout << "::[ERROR]:: " << x << std::endl; BREAK;
+#if PLATFORM == PLAT_ANDROID
+  #include <android/log.h>
+  #define LOG(x) \
+  { \
+    std::stringstream andLogStr; \
+    andLogStr << x; \
+    __android_log_write(ANDROID_LOG_INFO, "LOG", andLogStr.str().c_str()); \
+  }
+  #define WARN(x) { \
+    std::stringstream andLogStr; \
+    andLogStr << x; \
+    __android_log_write(ANDROID_LOG_INFO, "[WARNING]", andLogStr.str().c_str()); \
+  }
+  #define ERR(x) { \
+    std::stringstream andLogStr; \
+    andLogStr << x; \
+    __android_log_write(ANDROID_LOG_INFO, "::[ERROR]::", andLogStr.str().c_str()); \
+  }
+#else
+  #define LOG(x) std::cout << x << std::endl;
+  #define WARN(x) std::cout << "[WARNING]: " << x << std::endl;
+  #define ERR(x) std::cout << "::[ERROR]:: " << x << std::endl; BREAK;
+#endif
 
 /////////////////
 //DEFAULT TYPE DEFINITIONS

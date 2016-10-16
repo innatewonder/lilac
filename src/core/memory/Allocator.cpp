@@ -41,108 +41,94 @@ namespace Memory
   }
 }
 
-void* operator new(std::size_t size)
+void* localNew(std::size_t size) 
 {
   if(Memory::lNewDeleteAllocator && Memory::useCustom)
   {
     return Memory::lNewDeleteAllocator->Allocate(size);
   }
   return malloc(size);
+}
+
+void* localNewNothrow(std::size_t size)
+{
+#if PLATFORM == PLAT_ANDROID
+  return localNew(size);
+#else
+  try
+  {
+    return localNew(size);
+  }
+  catch(...)
+  {
+    assertion(false);
+  }
+  return nullptr;
+#endif
+}
+
+void* operator new(std::size_t size)
+{
+  return localNew(size);
 }
 
 void* operator new[](std::size_t size)
 {
-  if(Memory::lNewDeleteAllocator && Memory::useCustom)
-  {
-    return Memory::lNewDeleteAllocator->Allocate(size);
-  }
-  return malloc(size);
+  return localNew(size);
 }
 
 void* operator new(std::size_t size, const std::nothrow_t& tag)
 {
-  try
-  {
-    if(Memory::lNewDeleteAllocator && Memory::useCustom)
-    {
-      return Memory::lNewDeleteAllocator->Allocate(size);
-    }
-    return malloc(size);
-  }
-  catch(...)
-  {
-    assertion(false);
-  }
-  return nullptr;
+  return localNewNothrow(size);
 }
 
 void* operator new[](std::size_t size, const std::nothrow_t& tag)
 {
+  return localNewNothrow(size);
+}
+
+void localDelete(void* ptr)
+{
+  if(Memory::lNewDeleteAllocator && Memory::useCustom)
+  {
+    Memory::lNewDeleteAllocator->Deallocate(ptr);
+    return;
+  }
+  free(ptr);
+}
+
+void localDeleteNothrow(void* ptr)
+{
+#if PLATFORM == PLAT_ANDROID
+  localDelete(ptr);
+#else
   try
   {
-    if(Memory::lNewDeleteAllocator && Memory::useCustom)
-    {
-      return Memory::lNewDeleteAllocator->Allocate(size);
-    }
-    return malloc(size);
+    localDelete(ptr);
   }
   catch(...)
   {
     assertion(false);
   }
-  return nullptr;
+#endif
 }
 
 void operator delete(void* ptr) NOEXCEPT
 {
-  if(Memory::lNewDeleteAllocator && Memory::useCustom)
-  {
-    Memory::lNewDeleteAllocator->Deallocate(ptr);
-    return;
-  }
-  free(ptr);
+  localDelete(ptr);
 }
 
 void operator delete[](void* ptr) NOEXCEPT
 {
-  if(Memory::lNewDeleteAllocator && Memory::useCustom)
-  {
-    Memory::lNewDeleteAllocator->Deallocate(ptr);
-    return;
-  }
-  free(ptr);
+  localDelete(ptr);
 }
 
 void operator delete(void* ptr, const std::nothrow_t& tag)
 {
-  try
-  {
-    if(Memory::lNewDeleteAllocator && Memory::useCustom)
-    {
-      Memory::lNewDeleteAllocator->Deallocate(ptr);
-      return;
-    }
-    free(ptr);
-  }
-  catch(...)
-  {
-    assertion(false);
-  }
+  return localDeleteNothrow(ptr);
 }
 
 void operator delete[](void* ptr, const std::nothrow_t& tag)
 {
-  try
-  {
-    if(Memory::lNewDeleteAllocator && Memory::useCustom)
-    {
-      Memory::lNewDeleteAllocator->Deallocate(ptr);
-      return;
-    }
-    free(ptr);
-  }
-  catch(...)
-  {
-    assertion(false);
-  }
+  return localDeleteNothrow(ptr);
 }

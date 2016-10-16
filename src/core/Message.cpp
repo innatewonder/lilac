@@ -10,7 +10,7 @@ Message::~Message()
   delete[] m_data;
 }
 
-void Message::AddData(void *data, s32 dataSize)
+void Message::AddData(const void *data, s32 dataSize)
 {
   char* newDat = new char[m_dataSize + dataSize];
   memcpy(newDat, m_data, m_dataSize);

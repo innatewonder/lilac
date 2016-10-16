@@ -401,10 +401,10 @@ namespace Math
     return TranslationMatrix(delta);
   }
 
-
-
   OrientationMatrix::OrientationMatrix(const Quaternion& rotation)
-  { }
+  { 
+    TODO("orientation matrix init")
+  }
 
   Matrix OrientationMatrix::Build(const Quaternion& rotation)
   {
@@ -483,9 +483,9 @@ namespace Math
              0.0f, 0.0f, near / (near - far), 1.0f)
   { }
 
-  Matrix OrthographicMatrix::Build(f32 fov, f32 aspect, f32 near, f32 far)
+  Matrix OrthographicMatrix::Build(f32 width, f32 height, f32 near, f32 far)
   {
-    return OrthographicMatrix(fov, aspect, near, far);
+    return OrthographicMatrix(width, height, near, far);
   }
 
 

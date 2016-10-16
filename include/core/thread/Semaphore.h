@@ -19,5 +19,5 @@ public:
 private:
   std::mutex m_mutex;
   std::condition_variable m_condition;
-  int m_count;
+  std::atomic<int> m_count;
 };

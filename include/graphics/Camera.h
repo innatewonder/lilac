@@ -14,6 +14,7 @@ class Camera
     Math::Matrix& GetView();
 
   private:
+    bool m_dirty;
     Math::Point4 m_position;
     Math::Vector4 m_rotation;
 

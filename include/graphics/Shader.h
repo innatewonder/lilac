@@ -31,7 +31,7 @@ if(err) { \
     __LINE__, __FILE__, err); \
     __debugbreak(); } \
 }
-#else
+#elif PLATFORM != PLAT_ANDROID
 #define CHECK_GL_ERR \
 { \
   int err = glGetError();\
@@ -40,4 +40,6 @@ if(err) { \
       __LINE__, __FILE__, gluErrorString(err)); \
     exit(-1); } \
 }
+#else
+#define CHECK_GL_ERR
 #endif

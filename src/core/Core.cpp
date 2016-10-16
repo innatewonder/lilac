@@ -1,7 +1,10 @@
 #include "CommonPrecompiled.h"
 #include "Core.h"
 
-void Run(ArgParser args)
+static std::thread mainThread;
+static Semaphore mainNotify;
+
+void ThreadMain(ArgParser args) 
 {
   Memory::Initialize(args);
   //scope so that the global memory manager will close properly
@@ -21,6 +24,7 @@ void Run(ArgParser args)
     core.Initialize(args);
     core.Test();
 
+    mainNotify.Notify();
     core.Run();
 
     Memory::gDefaultAllocator->Log();
@@ -31,6 +35,12 @@ void Run(ArgParser args)
   //LOG("Current Engine memory leaks - 10");
   Memory::gDefaultAllocator->Log();
   Memory::Destroy();
+}
+
+void Run(ArgParser args)
+{
+  mainThread = std::thread(&ThreadMain, args);
+  mainNotify.Wait();
 }
 
 namespace Core
